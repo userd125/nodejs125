@@ -14,11 +14,11 @@ build:
     tags:
     - .*
   build_dir: /
-  cache:true
+  cache: true
   dockerfile_path: /Dockerfile
 test:
   stage: test
-  job_type:test
+  job_type: test
   only:
     branches:
     - .*
