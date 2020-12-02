@@ -3,19 +3,6 @@ version: 3.0
 stages:
   - test
   - build
-
-build:
-    label:build
-    job_type:image_build
-    only:
-        branches:
-        - .*
-        tags:
-        - .*
-    build_dir: /
-    cache: true
-    dockerfile_path: Dockerfile
-    
     
 test:
     label:test
@@ -44,3 +31,16 @@ test:
         - go get -t golang-redis-sample
         - go test golang-redis-sample
 
+
+build:
+    label:build
+    job_type:image_build
+    only:
+        branches:
+        - .*
+        tags:
+        - .*
+    build_dir: /
+    cache: true
+    dockerfile_path: Dockerfile
+    
