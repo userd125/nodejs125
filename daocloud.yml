@@ -3,44 +3,32 @@ version: 3.0
 stages:
   - test
   - build
-    
+  - deploy
+
 test:
-    label:test
-    job_type:image_test
-    only:
-        branches:
-        - .*
-        tags:
-        - .*
-    image:
-        node:6.11.0-wheezy
-
-    services:
-        - redis
-
-    # using default docker-link env
-    env:
-        - REDIS_PORT_6379_TCP_PROTO = "tcp"
-        - REDIS_PASSWORD = ""
-
-    install:
-        - sudo apt-get update
-
-    script:
-        - export GOPATH=/gopath
-        - go get -t golang-redis-sample
-        - go test golang-redis-sample
-
+  stage: test
+  image: node:6.11.0-wheezy
+  services:
+    - redis
+    - mysql
+  script:
+    - echo hello
+  only:
+    branches:
+      - master
+    tags: 
+      - v1*
+  except:
+    tags: 
 
 build:
-    label:build
-    job_type:image_build
-    only:
-        branches:
-        - .*
-        tags:
-        - .*
-    build_dir: /
-    cache: true
-    dockerfile_path: Dockerfile
-    
+  stage: build
+  job_type: image_build
+  dockerfile_path: /Dockerfile
+  build_dir: /
+
+  only:
+    branches:
+      - master
+    tags:
+      - v1
