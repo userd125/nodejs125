@@ -18,8 +18,7 @@ test:
       - master
     tags: 
       - v1*
-  except:
-    tags: 
+
 
 build:
   stage: build
