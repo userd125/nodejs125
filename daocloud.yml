@@ -1,31 +1,33 @@
 version: 3.0
 
-stages:
+stages: 
   - test
   - build
 
 
-build:
+build: 
+  label: build
   stage: build
   job_type: image_build
-  only:
-    branches:
+  only: 
+    branches: 
     - .*
     tags:
     - .*
   build_dir: /
   cache: true
   dockerfile_path: /Dockerfile
-test:
+test:  
+  label: test
   stage: test
   job_type: test
-  only:
-    branches:
+  only: 
+    branches: 
     - .*
     tags:
     - .*
   image: node:6.11.0-wheezy
-  script:
+  script: 
   - npm install
   - npm start
   
