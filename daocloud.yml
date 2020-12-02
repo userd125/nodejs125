@@ -1,0 +1,33 @@
+version: 3.0
+
+stages:
+  - test
+  - build
+  - deploy
+
+test:
+  stage: test
+  image: node:6.11.0-wheezy
+  services:
+    - redis
+    - mysql
+  script:
+    - echo hello
+  only:
+    branches:
+      - master
+    tags: 
+      - v1*
+
+
+build:
+  stage: build
+  job_type: image_build
+  dockerfile_path: /Dockerfile
+  build_dir: /
+
+  only:
+    branches:
+      - master
+    tags:
+      - v1
