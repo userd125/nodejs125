@@ -27,4 +27,5 @@ test:
   image: node:6.11.0-wheezy
   script:
   - npm install
+  - npm start
   
